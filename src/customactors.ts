@@ -6,7 +6,8 @@ import { fetchHowl } from "./processors/howl";
 
 const editorContainer = document.getElementById("customactors") as HTMLElement;
 const actorsEditor = monaco.editor.create(editorContainer, {
-    language: "javascript",
+    language: "json",
+    
     automaticLayout: true,
     theme: "vs-dark",
 });
