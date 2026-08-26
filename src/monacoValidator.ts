@@ -143,8 +143,7 @@ export function validate(model: monaco.editor.ITextModel) {
         markers = [];
         markers.push({
             severity: monaco.MarkerSeverity.Error,
-            message:
-                `The validator faulted out when trying to process your dialogue. 
+            message: `The validator faulted out when trying to process your dialogue. 
 This is a severe error that you should report to the discord along with the dialogue that caused it.
 
 At line ${lineNumber}
@@ -153,7 +152,7 @@ ${(e as Error).stack}`,
             startColumn: 1,
             endLineNumber: lines.length,
             endColumn: lines[lines.length - 1].length + 1,
-        })
+        });
     }
 
     monaco.editor.setModelMarkers(model, "owner", markers);
