@@ -2,6 +2,7 @@ import "./userWorker";
 import * as monaco from "monaco-editor";
 import { type IRange } from "monaco-editor";
 import { validate } from "./monacoValidator";
+import { validateJustFlakyFileHosts } from "./flakyFileHostValidator";
 
 const editorContainer = document.getElementById("editor-text") as HTMLElement;
 
@@ -594,9 +595,11 @@ if (model) {
         if (validateTimeout) clearTimeout(validateTimeout);
         validateTimeout = setTimeout(() => {
             validate(model);
+            validateJustFlakyFileHosts(model);
         }, 500);
     });
     validate(model);
+    validateJustFlakyFileHosts(model);
 }
 
 export function getEditorContent(): string {

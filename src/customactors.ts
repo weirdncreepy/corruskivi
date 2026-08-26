@@ -3,6 +3,7 @@ import * as monaco from "monaco-editor";
 import { generateEditorDialogue } from "./main";
 import { insertExtraActors } from "./actors";
 import { fetchHowl } from "./processors/howl";
+import { validateJustFlakyFileHosts } from "./flakyFileHostValidator";
 
 const editorContainer = document.getElementById("customactors") as HTMLElement;
 const actorsEditor = monaco.editor.create(editorContainer, {
@@ -13,8 +14,18 @@ const actorsEditor = monaco.editor.create(editorContainer, {
 });
 
 const model = actorsEditor.getModel();
+
+let validateTimeout: ReturnType<typeof setTimeout>;
+
 if (model) {
     model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    model.onDidChangeContent(() => {
+        if (validateTimeout) clearTimeout(validateTimeout);
+        validateTimeout = setTimeout(() => {
+            validateJustFlakyFileHosts(model);
+        }, 500);
+    });
+    validateJustFlakyFileHosts(model);
 }
 
 export function getCustomActorsContent(): string {

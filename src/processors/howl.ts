@@ -1,5 +1,6 @@
 import type { Howl } from "howler";
 import * as monaco from "monaco-editor";
+import { validateJustFlakyFileHosts } from "../flakyFileHostValidator";
 
 const editorContainer = document.getElementById("howls") as HTMLElement;
 const howlsEditor = monaco.editor.create(editorContainer, {
@@ -9,8 +10,18 @@ const howlsEditor = monaco.editor.create(editorContainer, {
 });
 
 const model = howlsEditor.getModel();
+
+let validateTimeout: ReturnType<typeof setTimeout>;
+
 if (model) {
     model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    model.onDidChangeContent(() => {
+        if (validateTimeout) clearTimeout(validateTimeout);
+        validateTimeout = setTimeout(() => {
+            validateJustFlakyFileHosts(model);
+        }, 500);
+    });
+    validateJustFlakyFileHosts(model);
 }
 
 let howls: { [key: string]: Howl } = {};
