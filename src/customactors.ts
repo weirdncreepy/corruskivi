@@ -34,7 +34,6 @@ if (model) {
             
             // filter out expected property/expected value on the voice line
             // this is what i get for cramming js into a json syntax lol
-            console.log(marker);
             if (line.includes('"voice"') && (marker.code === "513" || marker.code === "516")) {
                 actuallyFiltered = true;
                 return false;
