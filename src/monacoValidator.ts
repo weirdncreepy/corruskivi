@@ -554,11 +554,18 @@ function checkDialogueHasActor() {
         if (lastLine.startsWith("    ".repeat(2)) == true) {
             return; // skip if previous line is also indent level 2
         }
-        while (/^\s*\n?$|^(?:    ){2,3}\w/m.test(lastLine)) {
+
+        //Regex:
+        // * Any amount of whitespace, followed by a newline (blank line), OR
+        // * 2 or 3 indentation levels, followed by a word character (dialogue line or command), OR
+        // * Four underscores (____SHOWIF/NESTIF/END)
+        while (/^\s*\n?$|^(?:    ){2,3}\w|^____/m.test(lastLine)) {
+            //continue searching backwards until we find a line we actually care about
             lastLineIndex--;
             if (lastLineIndex < 0) return;
             lastLine = lines[lastLineIndex];
         }
+        //Regex: One indentation level followed by a word character (actor selection)
         if (/^    \w/m.test(lastLine) == false) {
             markers.push({
                 severity: monaco.MarkerSeverity.Error,
