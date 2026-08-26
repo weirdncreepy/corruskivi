@@ -25,6 +25,25 @@ if (model) {
             validateJustFlakyFileHosts(model);
         }, 500);
     });
+
+    model.onDidChangeDecorations(() => {
+        let markers = monaco.editor.getModelMarkers({ owner: "json", resource: model.uri });
+        let actuallyFiltered = false;
+        let filtered = markers.filter((marker) => {
+            let line = model.getLineContent(marker.startLineNumber).trim();
+            
+            // filter out expected property/expected value on the voice line
+            // this is what i get for cramming js into a json syntax lol
+            console.log(marker);
+            if (line.includes('"voice"') && (marker.code === "513" || marker.code === "516")) {
+                actuallyFiltered = true;
+                return false;
+            }
+            return true;
+        });
+        if (actuallyFiltered) monaco.editor.setModelMarkers(model, "json", filtered);
+    });
+
     validateJustFlakyFileHosts(model);
 }
 
