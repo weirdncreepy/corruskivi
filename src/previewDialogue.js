@@ -55,6 +55,10 @@ export function previewDialogue(dialogue, i = 0) {
                     `;
                 dialogueBox.insertAdjacentHTML("beforeend", newLine);
                 document.querySelector(".dialogue-message:last-of-type")?.classList.add("sent");
+
+                if (current.then) {
+                    current.then();
+                }
             } else {
                 //sendDialogue(dialogue, i + 1);
                 //this caused hilarious issues where if a dialogue was skipped, it would show the next showable dialogue repeatedly instead
