@@ -49,7 +49,6 @@ export function preprocessHowls(dialogue: string, silent = false) {
                 args: args,
             };
 
-            newExec = newExec.replace(howlCommand[0], "");
 
             let howl = fetchHowl(howlName);
             if (!howl) {
@@ -59,6 +58,8 @@ export function preprocessHowls(dialogue: string, silent = false) {
             } else {
                 howlObjects.push(howlObject);
             }
+            
+            newExec = newExec.replace(howlCommand[0], "");
         }
 
         let sfxmapCommands = exec.matchAll(/[^.](play|ratween)\((.*?)\)/g);
@@ -218,8 +219,9 @@ export function fetchHowl(name: string): Howl {
     }
     
     if (!howls[name]) {
-        throw new Error(`Howl "${name}" does not exist.`);
+        return null as any;
     }
+
     return howls[name];
 }
 
