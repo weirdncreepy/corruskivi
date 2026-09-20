@@ -616,7 +616,9 @@ sprite
         glad you asked
         "sprite" is the command that's used to indicate when and where a howl starts and stops
         for example, you would use <br/><br/>sprite: {<br/>__default: [50, 100, true]<br/>}<br/><br/> to indicate that the howl you're playing starts 50 miliseconds in to the audio, then keeps going for another 100 miliseconds
-        the "true" just means it loops btw
+        the "true" just means it loops btw. change it to false and it'll one-shot instead.
+        <span class="code">__default</span> is what will play when you example.play()
+        but you can add more than just __default:<br/><br/>sprite: {<br/>dingus: [2000, 1000, false]<br/>}<br/><br/>and then you can use example.play("dingus") to play just that small segment instead of the whole thing. 
         sprite is probably the scariest part of making a custom howl, even if it should really be the easiest
         it's pretty much just counting how many seconds are in your audio, then converting it to miliseconds
         obviously though it's not required for your howl to work, it's just useful
