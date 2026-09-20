@@ -573,15 +573,61 @@ howlslist
 
 customhowls
     moth
-        custom howls are pretty complicated
-        so complicated i cant really explain them here
-        youre better off asking <span class="code">@craftxbox</span> on the <a class="code" target="_blank" href="https://discord.gg/qwKhJMan8H">discord</a> about them
-        i can show you an example though
+        alright, so, custom howls
+        they're pretty complicated, but i think i can simplify them enough
+    self
+        what if i don't want simple
+    moth
+        well, you're going to have to live with that feeling
+        i don't actually know how these work under the hood lol
+        anyway, custom howls
+        let's take a look at this example real quick:
         <code>example = new Howl({<br/>&nbsp;&nbsp;src: ["https://corru.observer/audio/ozoloop.ogg"],<br/>&nbsp;&nbsp;rate: 2,<br/>&nbsp;&nbsp;volume: 0.5,<br/>&nbsp;&nbsp;loop: true<br/>});</code>
-        and then you'd use that in a dialogue like this:<br/><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXEC::example.play()</code>
+        "example" is the name, the audio source (src) is straight from corru.observer...
+        "rate" refers to the rate at which its played, which means both the pitch and the speed
+        volume is pretty straightforward, referring to the volume
+        and loop just says if it loops or not
+        you use <br/><br/><code>EXEC::example.play()</code> to play it, and <br/><br/><code>EXEC::example.stop()</code> to stop it
+        you can also have multiple howls playing at once
+        so, if you put in, say, <br/><br/><code>EXEC::example.play();example500.play()</code><br/><br/> you'll play both "example" and our made-up howl "example 500"
+        trying to run them seperately just sort of doesn't work
+        you might have noticed that the custom howl command is way simpler than the normal howl command
+        that's in part because you can't change the rate and volume of your custom howl on the fly
+        so if you're trying to make your custom howl sound different, you'll need a totally different howl that just uses the same audio source
+        if you're playing multiple howls at once, but only want one of them to stop, just run the "stop" command, but only write down the one howl
         you don't need to use the <span class="code">SILENT::</span> command on actor transitions with custom howls, they work fine without it
         but it might still play the actor voice sound unless you use SILENT::
-    
+        if anything here seems too confusing, or your entire corruskivi breaks, go ask <span class="code">@craftxbox</span> or any other user on the <a class="code" target="_blank" href="https://discord.gg/qwKhJMan8H">discord</a> for help
+        we don't bite lol
+        got all that?
+    self
+        no
+    moth
+        great, because we're not done yet
+        there's also "sprite"
+    RESPONSES::self
+        whats sprite<+>sprite
+        enough<+>advanced
+            FAKEEND::(back)
+
+
+sprite
+    moth
+        glad you asked
+        "sprite" is the command that's used to indicate when and where a howl starts and stops
+        for example, you would use <br/><br/>sprite: {<br/>__default: [50, 100, true]<br/>}<br/><br/> to indicate that the howl you're playing starts 50 miliseconds in to the audio, then keeps going for another 100 miliseconds
+        the "true" just means it loops btw
+        sprite is probably the scariest part of making a custom howl, even if it should really be the easiest
+        it's pretty much just counting how many seconds are in your audio, then converting it to miliseconds
+        obviously though it's not required for your howl to work, it's just useful
+        keep in mind, sprite ignores if your audio is slowed down, sped up, whatever, so you only need to count the seconds for the original audio source
+        pretty convenient, right?
+    self
+        sure
+        how do i make my custom actor use different talk sounds each time
+    moth
+        if ever you figure out how to reverse engineer that whole thing, let me know
+        i have no idea lol
     RESPONSES::self
         ok<+>advanced
             FAKEEND::(back)
