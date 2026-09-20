@@ -629,10 +629,56 @@ howlactions
         <code>EXEC::example.seek(1000)</code> will jump straight to the 1 second mark of the howl, immediately if its already playing, or whenever you next play()
         <code>EXEC::example.mute(true)</code> is pretty self explanatory. it mutes your howl, but keeps playing in the background. change true for false to unmute.
         <span class=code>load</span> and <span class=code>unload</span> also exist but they're not really useful to use in a dialogue so i wont bother explaining them
+        you also get a special action called <span class=code>ratween</span> that's invoked a little different than the others
+        <code>EXEC::ratween(example, 0.5, 1000)</code><br/><br/>is kinda like fade, it'll slowly change your howl's rate to 0.5 over the span of 1000 milliseconds
+        special to note here that you put example in as an argument, instead of up front like the rest of the actions.
         
     RESPONSES::self
         sprite<+>sprite
+        changebgm<+>changebgm
         thanks<+>advanced
+            FAKEEND::(back)
+
+changebgm
+____NESTIF::[["fbx__editorintropleasedontcollide-initialtext", false]]
+    self
+        my editor shows me a couple of special actions you didnt mention
+            EXEC::change("illegalEditor", "++");
+        changeBgm and revertBgm
+        what are those?
+    moth
+        TEXEC::window.silly.getMothLine("illegalEditor", 1);
+        TEXEC::window.silly.getMothLine("illegalEditor", 2);
+        TEXEC::window.silly.getMothLine("illegalEditor", 3);
+        TEXEC::window.silly.getMothLine("illegalEditor", 4);
+    moth
+        anyways, let me find the docs
+        ...
+        yep, okay
+____END
+        changeBgm is like ratween, it takes your howl as an argument, instead of as a prefix
+        but its like. EXTRA crazy for configuration
+        instead of taking rate/etc as extra arguments, it instead wants a JavaScript Object
+        dont be too intimidated, or do be, up to you. either way, its kinda similar to how you write custom actors
+        <code>EXEC::changeBgm(example, {length: 1000, preserve: true, rate: false, seek: false, pause: false})</code><br/><br/> is how you invoke it. 
+        it sets your howl into the mindspike's background music, which as im sure you're aware isn't something a thoughtstream is supposed to be able to do
+        you could omit the entire {} section and the comma if you JUST want to set background music but the options are pretty powerful too
+        changeBgm does a crossfade between whatever bgm was playing before, into your new bgm. ie: the old music fades out, and the new one fades in at the same time.
+        length controls how long that crossfade takes. by default it'll be 1000ms, aka 1 second
+        preserve determines if you want to save the old bgm track or not. this is useful for revertBgm which we'll get into later
+        rate is as you'd expect, give it a decimal number and it will change the rate.
+        seek is also like normal. give it an integer number and it'll seek there, in milliseconds
+        pause only affects the old bgm, if you set it to true instead of false, it will pause the old bgm instead of stopping it outright. so revertBgm will resume instead of restart
+        now here's the crazier bit: if you dont want to set any specific value, say rate, or seek, you want to remove them entirely from the {} block
+        so example, you want a three second crossfade and the new music at 2x speed:<br/><br/>EXEC::changeBgm(example, {length: 3000, rate: 2})<br/><br/>thats all you need. you don't include the preserve, seek, or pause bits at all.
+        thankfully, revertBgm is way easier. it switches back to the old music you had playing (so long as you preserve:true'd it)
+        it takes a single argument, the crossfade length. so:<br/><br/>EXEC::revertBgm(1000)</br></br> will fade back to the music you played before over one second.
+        note that if you haven't done changeBgm more than once, you probably wont be able to revert to anything!
+        it also says here you can address <span class=code>env.bgm</span> and <span class=code>env.oldBgm</span> as if they were howl names (like <span class=code>example</span> from earlier), so you can run actions on the music without necessarily knowing which howl's actually in play
+        all in all this stuff is super complicated and im not entirely sure im explaining it right either so as usual ask the <a class="code" target="_blank" href="https://discord.gg/qwKhJMan8H">discord</a> peeps about it if you're confused
+    RESPONSES::self
+        sprite<+>sprite
+        i'll figure it out<+>advanced
             FAKEEND::(back)
 
 sprite
