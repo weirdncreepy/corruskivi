@@ -17,7 +17,7 @@ monaco.languages.setMonarchTokensProvider("corru-dialogue", {
         root: [
             [/^(    [A-Z]+)(::)(.*)/, ["keyword", "operators", "string"]],
             [/^(____[A-Z]+)(::)(.*)/, ["keyword", "operators", "string"]],
-            [/^(____END$)/, "keyword"],
+            [/^(____(?:END|SHOWONCE))$/, "keyword"],
             [/^(        [A-Z]+)(::)(.*)/, ["keyword", "operators", "string"]],
             [/^(            [A-Z]+)(::)(.*)/, ["keyword", "operators", "string"]],
             [/^(        .+)(<\+>)(.+)/, ["string", "keyword", "identifier"]],
@@ -261,6 +261,13 @@ function createRootCmdProposals(range: IRange) {
             documentation: "Show this dialogue only if the condition is met",
             insertText: '____SHOWIF::[["fbx__${1:editorpreview}-${2:branch}"]]',
             insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            range: range,
+        },
+        {
+            label: "____SHOWONCE",
+            kind: monaco.languages.CompletionItemKind.Keyword,
+            documentation: 'Show this dialogue only once. Shortcut for "____SHOWIF::[["fbx__<chain>-<branch>"]]"',
+            insertText: "____SHOWONCE",
             range: range,
         },
         {
