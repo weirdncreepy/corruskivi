@@ -614,7 +614,7 @@ customhowls
 sprite
     moth
         glad you asked
-        "sprite" is the command that's used to indicate when and where a howl starts and stops
+        "sprite" is the property that's used to indicate when and where a howl starts and stops
         for example, you would use <br/><br/>sprite: {<br/>__default: [50, 100, true]<br/>}<br/><br/> to indicate that the howl you're playing starts 50 miliseconds in to the audio, then keeps going for another 100 miliseconds
         the "true" just means it loops btw. change it to false and it'll one-shot instead.
         <span class="code">__default</span> is what will play when you example.play()
