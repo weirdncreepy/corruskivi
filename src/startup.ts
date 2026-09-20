@@ -640,7 +640,7 @@ howlactions
             FAKEEND::(back)
 
 changebgm
-____NESTIF::[["fbx__editorintropleasedontcollide-initialtext", false]]
+____NESTIF::[["fbx__editorintropleasedontcollide-changebgm", false]]
     self
         my editor shows me a couple of special actions you didnt mention
             EXEC::change("illegalEditor", "++");
@@ -701,6 +701,7 @@ sprite
         if ever you figure out how to reverse engineer that whole thing, let me know
         <span definition="this is as of yet unsupported by corruskivi and there is no way to do custom sounds with randomization">i have no idea lol</span>
     RESPONSES::self
+        actions<+>howlactions
         ok<+>advanced
             FAKEEND::(back)
 
