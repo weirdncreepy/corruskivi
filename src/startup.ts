@@ -592,9 +592,12 @@ customhowls
         so, if you put in, say, <br/><br/><code>EXEC::example.play();example500.play()</code><br/><br/> you'll play both "example" and our made-up howl "example 500"
         trying to run them seperately just sort of doesn't work
         you might have noticed that the custom howl command is way simpler than the normal howl command
-        that's in part because you can't change the rate and volume of your custom howl on the fly
-        so if you're trying to make your custom howl sound different, you'll need a totally different howl that just uses the same audio source
-        if you're playing multiple howls at once, but only want one of them to stop, just run the "stop" command, but only write down the one howl
+        that's in part because the regular howls are doing a lot of the heavy lifting for you
+        if you want to change the rate, or volume, you'd normally just change them in your play()
+        but for a custom howl, you'll need to do each action manually, like example.rate(0.5); example.play();
+        though on the upside you get way more options than just rate and volume
+        you can use play, pause, stop, mute, volume, fade, rate, seek, loop, load, unload, and a special action called ratween
+        we definitely don't have the time to explain all those here though
         you don't need to use the <span class="code">SILENT::</span> command on actor transitions with custom howls, they work fine without it
         but it might still play the actor voice sound unless you use SILENT::
         if anything here seems too confusing, or your entire corruskivi breaks, go ask <span class="code">@craftxbox</span> or any other user on the <a class="code" target="_blank" href="https://discord.gg/qwKhJMan8H">discord</a> for help
