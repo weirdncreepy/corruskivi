@@ -594,7 +594,7 @@ customhowls
         you might have noticed that the custom howl command is way simpler than the normal howl command
         that's in part because the regular howls are doing a lot of the heavy lifting for you
         if you want to change the rate, or volume, you'd normally just change them in your play()
-        but for a custom howl, you'll need to do each action manually, like example.rate(0.5); example.play();
+        but for a custom howl, you'll need to do each action manually, like <br/><br/><code>EXEC::example.rate(0.5); example.play();</code>
         though on the upside you get way more options than just rate and volume
         you can use play, pause, stop, mute, volume, fade, rate, seek, loop, load, unload, and a special action called ratween
         we definitely don't have the time to explain all those here though
@@ -609,10 +609,31 @@ customhowls
         great, because we're not done yet
         there's also "sprite"
     RESPONSES::self
-        whats sprite<+>sprite
+        sprite<+>sprite
+        actions<+>howlactions
         enough<+>advanced
             FAKEEND::(back)
 
+howlactions
+    moth
+        so when you have your example.play(), the action here is the "play" part. between the ()'s is the "arguments"
+        play is pretty simple. it plays your custom howl
+        you can optionally give it an argument for a specific sprite but we wont get into that here
+        but you also have <span class=code>pause</span> and <span class=code>stop</span>
+        <code>EXEC::example.pause()</code> will pause your howl right where it is. just play() it again and it'll start where it left off
+        <code>EXEC::example.stop()</code> will obviously stop it entirely. play will start from the beginning when you next use it.
+        <span class=code>volume</span> and <span class=code>volume</span> are the same way as you'd be familiar with regular howls
+        <code>EXEC::example.rate(0.5)</code> makes your howl play half speed
+        <code>EXEC::example.volume(0.5)</code> makes it play half volume
+        <span class=code>fade</span> gets funky with it.<br/><code>EXEC::example.fade(1,0.5,1000)</code> will fade the volume from 100%, to 50%, over 1000 milliseconds, aka one second
+        <code>EXEC::example.seek(1000)</code> will jump straight to the 1 second mark of the howl, immediately if its already playing, or whenever you next play()
+        <code>EXEC::example.mute(true)</code> is pretty self explanatory. it mutes your howl, but keeps playing in the background. change true for false to unmute.
+        <span class=code>load</span> and <span class=code>unload</span> also exist but they're not really useful to use in a dialogue so i wont bother explaining them
+        
+    RESPONSES::self
+        sprite<+>sprite
+        thanks<+>advanced
+            FAKEEND::(back)
 
 sprite
     moth
