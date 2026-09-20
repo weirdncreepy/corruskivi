@@ -627,7 +627,7 @@ sprite
         how do i make my custom actor use different talk sounds each time
     moth
         if ever you figure out how to reverse engineer that whole thing, let me know
-        i have no idea lol
+        <span definition="this is as of yet unsupported by corruskivi and there is no way to do custom sounds with randomization">i have no idea lol</span>
     RESPONSES::self
         ok<+>advanced
             FAKEEND::(back)
