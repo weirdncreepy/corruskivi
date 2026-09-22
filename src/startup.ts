@@ -634,6 +634,8 @@ howlactions
         you also get a special action called <span class=code>ratween</span> that's invoked a little different than the others
         <code>EXEC::ratween(example, 0.5, 1000)</code><br/><br/>is kinda like fade, but between one howl and itself. it'll slowly change your howl's rate to 0.5 over the span of 1000 milliseconds
         special to note here that you do have to put "example" in as an argument here, instead of up front like the rest of the actions.
+        uh, not with the airquotes, though. unlike some other actions, ratween doesn't want those anywhere.
+        so, while <code>example.play("sprite")</code><br/><br/> is fine, <code>ratween("example")</code><br/><br/>wouldn't be 
         
     RESPONSES::self
         sprite<+>sprite
@@ -714,7 +716,7 @@ showifnestif
         <span class="code">SHOWIF::</span> is a standard command that lets you show a dialogue line or response only if a certain condition is met
         usually this would be if the player has seen an entity or dialogue or whatever before.
         as an example:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code">SHOWIF::[["whatever"], ["example", "testing"]]</span>
-        this will only show if the 'whatever' flag  is anything but false, and the 'example' flag is specifically only "testing"
+        this will only show if the 'whatever' flag is anything but false, and the 'example' flag is specifically only "testing"
         typically you would use these for seeing if a branch has been seen before
         the way you do that is by using <span class="code">fbx__chainname-branchname</span> as the key.
         the default chain is <span class="code">editorpreview</span>, so if you wanted to see if the player has seen the 'start' branch of that chain, you would use <span class="code">fbx__editorpreview-start</span>
